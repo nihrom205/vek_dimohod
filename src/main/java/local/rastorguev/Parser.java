@@ -11,10 +11,7 @@ import org.jsoup.select.Elements;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class <Name class>.
@@ -58,7 +55,7 @@ public class Parser {
                             append(entryDiametr.getKey()).
                             append("&Filters%5B4038%5D%5Bvalue%5D=").
                             append(entryType.getKey());
-                    parse(sbFiltr.toString(), Integer.valueOf(entryDiametr.getValue()), entryType.getKey());
+//                    parse(sbFiltr.toString(), Integer.valueOf(entryDiametr.getValue()), entryType.getKey());
                     sbFiltr.delete(0, sbFiltr.length());
                 }
             }
@@ -138,8 +135,16 @@ public class Parser {
         File file = new File("vek.xls");
         HSSFWorkbook excel = new HSSFWorkbook();
         Sheet sheet = excel.createSheet("Лист 1");
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        Row row = sheet.createRow(0);
+        Row rowDate = sheet.createRow(0);
+        rowDate.createCell(0).setCellValue("Дата: ");
+        rowDate.createCell(1).setCellValue(day + "-" + month + "-" + year);
+
+        Row row = sheet.createRow(1);
         row.createCell(0).setCellValue("п/п");
         row.createCell(1).setCellValue("Наименование");
         row.createCell(2).setCellValue("Тип трубы");
@@ -148,7 +153,7 @@ public class Parser {
 
         for (int i = 0; i < list.size(); i++) {
             Node currentNode = list.get(i);
-            Row rowCell = sheet.createRow(i + 1);
+            Row rowCell = sheet.createRow(i + 2);
             rowCell.createCell(0).setCellValue( i + 1);
             rowCell.createCell(1).setCellValue(currentNode.getName_product());
             rowCell.createCell(2).setCellValue(currentNode.getPipeTypeStr());
