@@ -18,10 +18,19 @@ import java.util.*;
 public class StoreSQL {
     private static final Logger logger = Logger.getLogger(StoreSQL.class);
     private Connection conn = null;
+    private String config = "config.properties";
 
     public StoreSQL() {
+
+//        if ((new File(config)).exists()) {
+//            logger.info("config file found");
+//        } else {
+//            logger.info("config file not found");
+//            return;
+//        }
+
         Properties pr = new Properties();
-        try (FileInputStream fs = new FileInputStream("config.properties")) {
+        try (FileInputStream fs = new FileInputStream(config)) {
             pr.load(fs);
         } catch (IOException e) {
             e.printStackTrace();

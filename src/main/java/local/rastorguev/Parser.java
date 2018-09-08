@@ -55,7 +55,7 @@ public class Parser {
                             append(entryDiametr.getKey()).
                             append("&Filters%5B4038%5D%5Bvalue%5D=").
                             append(entryType.getKey());
-//                    parse(sbFiltr.toString(), Integer.valueOf(entryDiametr.getValue()), entryType.getKey());
+                    parse(sbFiltr.toString(), Integer.valueOf(entryDiametr.getValue()), entryType.getKey());
                     sbFiltr.delete(0, sbFiltr.length());
                 }
             }
